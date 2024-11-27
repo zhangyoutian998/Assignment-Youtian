@@ -30,7 +30,7 @@ WHERE Color is NOT NULL;
 --7
 SELECT 'Name:' + Name + ' -- '+ 'Color:' + Color AS NameColor
 FROM Production.Product
-WHERE Color IS NOT NULL
+WHERE Color IS NOT NULL;
 
 --8
 SELECT ProductID, Name
@@ -64,7 +64,7 @@ SELECT Name
 FROM Production.Product
 WHERE Name LIKE 'SPO%' 
   AND Name NOT LIKE 'SPOK%'
-ORDER BY Name
+ORDER BY Name;
 
 --14
 SELECT DISTINCT Color
