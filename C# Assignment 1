@@ -1,0 +1,349 @@
+using System;
+
+namespace _02UnderstandingTypes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Data Type Information:");
+            Console.WriteLine();
+
+            PrintTypeInfo("sbyte", sizeof(sbyte), sbyte.MinValue, sbyte.MaxValue);
+            PrintTypeInfo("byte", sizeof(byte), byte.MinValue, byte.MaxValue);
+            PrintTypeInfo("short", sizeof(short), short.MinValue, short.MaxValue);
+            PrintTypeInfo("ushort", sizeof(ushort), ushort.MinValue, ushort.MaxValue);
+            PrintTypeInfo("int", sizeof(int), int.MinValue, int.MaxValue);
+            PrintTypeInfo("uint", sizeof(uint), uint.MinValue, uint.MaxValue);
+            PrintTypeInfo("long", sizeof(long), long.MinValue, long.MaxValue);
+            PrintTypeInfo("ulong", sizeof(ulong), ulong.MinValue, ulong.MaxValue);
+            PrintTypeInfo("float", sizeof(float), float.MinValue, float.MaxValue);
+            PrintTypeInfo("double", sizeof(double), double.MinValue, double.MaxValue);
+            PrintTypeInfo("decimal", sizeof(decimal), decimal.MinValue, decimal.MaxValue);
+
+            Console.ReadLine(); // Keep the console open
+        }
+
+        static void PrintTypeInfo(string typeName, int size, object minValue, object maxValue)
+        {
+            Console.WriteLine($"{typeName}:");
+            Console.WriteLine($"  Size: {size} bytes");
+            Console.WriteLine($"  Min Value: {minValue}");
+            Console.WriteLine($"  Max Value: {maxValue}");
+            Console.WriteLine();
+        }
+    }
+}
+
+
+
+using System;
+
+namespace CenturiesConversion
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of centuries: ");
+            if (int.TryParse(Console.ReadLine(), out int centuries))
+            {
+                const int YearsInCentury = 100;
+                const int daysInYear = 365;
+                const int HoursInDay = 24;
+                const int MinutesInHour = 60;
+                const int SecondsInMinute = 60;
+                const int MillisecondsInSecond = 1000;
+                const int MicrosecondsInMillisecond = 1000;
+                const int NanosecondsInMicrosecond = 1000;
+
+                long years = centuries * YearsInCentury;
+                long days = (long)(years * 365.2425); // Including leap years
+                long hours = days * HoursInDay;
+                long minutes = hours * MinutesInHour;
+                long seconds = minutes * SecondsInMinute;
+                long milliseconds = seconds * MillisecondsInSecond;
+                long microseconds = milliseconds * MicrosecondsInMillisecond;
+                decimal nanoseconds = (decimal)microseconds * NanosecondsInMicrosecond;
+
+                Console.WriteLine($"{centuries} centuries = {years} years = {days} days = {hours} hours = {minutes} minutes");
+                Console.WriteLine($"= {seconds} seconds = {milliseconds} milliseconds = {microseconds} microseconds = {nanoseconds} nanoseconds");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
+        }
+    }
+}
+
+
+
+using System;
+
+namespace Exercise03
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("FizzBuzz Game (1 to 100):\n");
+
+            for (int i = 1; i <= 100; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    Console.WriteLine("fizzbuzz");
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.WriteLine("fizz");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.WriteLine("buzz");
+                }
+                else
+                {
+                    Console.WriteLine(i);
+                }
+            }
+
+            Console.ReadLine(); // Keep the console open
+        }
+    }
+}
+
+int max = 500;
+for (byte i = 0; i < max; i++)
+{
+    WriteLine(i);
+}
+int correctNumber = new Random().Next(3) + 1;
+
+
+using System;
+
+namespace GuessTheNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Generate a random number between 1 and 3
+            Random random = new Random();
+            int randomNumber = random.Next(1, 4);
+
+            Console.WriteLine("I have picked a number between 1 and 3. Can you guess what it is?");
+            Console.Write("Enter your guess: ");
+
+            try
+            {
+                // Convert the user's input from string to int
+                int userGuess = int.Parse(Console.ReadLine());
+
+                // Check if the guess is out of range
+                if (userGuess < 1 || userGuess > 3)
+                {
+                    Console.WriteLine("Your guess is outside the valid range (1-3). Please guess again.");
+                }
+                else
+                {
+                    // Compare the guess with the random number
+                    if (userGuess == randomNumber)
+                    {
+                        Console.WriteLine("Congratulations! You guessed the correct number.");
+                    }
+                    else if (userGuess < randomNumber)
+                    {
+                        Console.WriteLine("Too low! Try again.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Too high! Try again.");
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Please enter a number between 1 and 3.");
+            }
+
+            Console.WriteLine($"The correct number was: {randomNumber}");
+        }
+    }
+}
+
+//2
+using System;
+
+namespace PrintAPyramid
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of rows for the pyramid: ");
+            if (int.TryParse(Console.ReadLine(), out int rows) && rows > 0)
+            {
+                for (int i = 1; i <= rows; i++) // Outer loop for each row
+                {
+                    // Inner loop 1: Print spaces
+                    for (int j = 1; j <= rows - i; j++)
+                    {
+                        Console.Write(" ");
+                    }
+
+                    // Inner loop 2: Print stars
+                    for (int k = 1; k <= (2 * i - 1); k++)
+                    {
+                        Console.Write("*");
+                    }
+
+                    // Move to the next line
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid positive number.");
+            }
+        }
+    }
+}
+
+//3
+using System;
+
+namespace GuessTheNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Generate a random number between 1 and 3
+            Random random = new Random();
+            int randomNumber = random.Next(1, 4);
+
+            Console.WriteLine("I have picked a number between 1 and 3. Can you guess what it is?");
+            Console.Write("Enter your guess: ");
+
+            // Read and convert the user's input
+            int guessedNumber = int.Parse(Console.ReadLine());
+
+            // Validate the guess range
+            if (guessedNumber < 1 || guessedNumber > 3)
+            {
+                Console.WriteLine("Your guess is outside the valid range (1-3). Please try again.");
+            }
+            else
+            {
+                // Provide feedback on the guess
+                if (guessedNumber == randomNumber)
+                {
+                    Console.WriteLine("Congratulations! You guessed the correct number.");
+                }
+                else if (guessedNumber < randomNumber)
+                {
+                    Console.WriteLine("Too low! Try again.");
+                }
+                else
+                {
+                    Console.WriteLine("Too high! Try again.");
+                }
+            }
+
+            Console.WriteLine($"The correct number was: {randomNumber}");
+        }
+    }
+}
+
+//4
+using System;
+
+namespace BirthDateCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter your birth date (yyyy-mm-dd): ");
+            string input = Console.ReadLine();
+
+            if (DateTime.TryParse(input, out DateTime birthDate))
+            {
+                // Calculate the current age in days
+                DateTime today = DateTime.Today;
+                int daysOld = (int)(today - birthDate).TotalDays;
+
+                // Calculate the days to the next 10,000-day anniversary
+                int daysToNextAnniversary = 10000 - (daysOld % 10000);
+                DateTime nextAnniversaryDate = today.AddDays(daysToNextAnniversary);
+
+                // Output results
+                Console.WriteLine($"\nYou are {daysOld} days old.");
+                Console.WriteLine($"Your next 10,000-day anniversary will be on: {nextAnniversaryDate:yyyy-MM-dd}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid date format. Please enter the date in yyyy-mm-dd format.");
+            }
+        }
+    }
+}
+
+//5
+using System;
+
+namespace TimeOfDayGreeting
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Use DateTime.Now to get the current time
+            DateTime currentTime = DateTime.Now;
+
+            // Testing purposes: Uncomment this line and set a specific time for testing
+            // currentTime = new DateTime(2024, 12, 1, 22, 0, 0); // Example: 10:00 PM
+
+            int hour = currentTime.Hour;
+
+            Console.WriteLine($"Current time: {currentTime:hh:mm tt}");
+
+            // Determine and print the appropriate greeting
+            if (hour >= 5 && hour < 12) // Morning: 5 AM to 11:59 AM
+            {
+                Console.WriteLine("Good Morning");
+            }
+            if (hour >= 12 && hour < 17) // Afternoon: 12 PM to 4:59 PM
+            {
+                Console.WriteLine("Good Afternoon");
+            }
+            if (hour >= 17 && hour < 21) // Evening: 5 PM to 8:59 PM
+
+
+//6
+                using System;
+
+            namespace CountingByIncrements
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        for (int outer = 1; outer <= 4; outer++) // Outer loop for increments (1 to 4)
+                        {
+                            for (int inner = 0; inner <= 24; inner += outer) // Inner loop counts up to 24
+                            {
+                                Console.Write(inner); // Print the current value
+                                if (inner + outer <= 24) // Add a comma if it's not the last number
+                                {
+                                    Console.Write(",");
+                                }
+                            }
+                            Console.WriteLine(); // Move to the next line after each increment group
+                        }
+                    }
+                }
+            }
