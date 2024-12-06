@@ -1,0 +1,498 @@
+// See https://aka.ms/new-console-template for more information
+
+//Practice Array
+//1
+using System;
+
+namespace ArrayCopy
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Step 1: Create an initial array with 10 items
+            int[] originalArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            // Step 2: Create a second array with the same length as the original array
+            int[] copiedArray = new int[originalArray.Length];
+
+            // Step 3: Copy the elements from the original array to the new array using a loop
+            for (int i = 0; i < originalArray.Length; i++)
+            {
+                copiedArray[i] = originalArray[i];
+            }
+
+            // Step 4: Print both arrays to verify the copy
+            Console.WriteLine("Original Array: ");
+            PrintArray(originalArray);
+
+            Console.WriteLine("Copied Array: ");
+            PrintArray(copiedArray);
+        }
+
+        // Helper method to print an array
+        static void PrintArray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + (i < array.Length - 1 ? ", " : ""));
+            }
+            Console.WriteLine(); // Move to the next line after printing
+        }
+    }
+}
+//2
+using System;
+using System.Collections.Generic;
+
+namespace ListManager
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Initialize an empty list
+            List<string> itemList = new List<string>();
+
+            while (true) // Infinite loop
+            {
+                Console.WriteLine("Enter command (+ item, - item, or -- to clear):");
+                string command = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(command))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid command.");
+                    continue;
+                }
+
+                if (command.StartsWith("+")) // Add an item
+                {
+                    string itemToAdd = command.Substring(1).Trim();
+                    if (!string.IsNullOrEmpty(itemToAdd))
+                    {
+                        itemList.Add(itemToAdd);
+                        Console.WriteLine($"Added: {itemToAdd}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please specify an item to add.");
+                    }
+                }
+                else if (command.StartsWith("-")) // Remove an item
+                {
+                    string itemToRemove = command.Substring(1).Trim();
+                    if (itemList.Remove(itemToRemove))
+                    {
+                        Console.WriteLine($"Removed: {itemToRemove}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Item not found: {itemToRemove}");
+                    }
+                }
+                else if (command == "--") // Clear the list
+                {
+                    itemList.Clear();
+                    Console.WriteLine("List cleared.");
+                }
+                else // Invalid command
+                {
+                    Console.WriteLine("Invalid command. Use + to add, - to remove, or -- to clear.");
+                }
+
+                // Display the current list
+                Console.WriteLine("\nCurrent List:");
+                if (itemList.Count > 0)
+                {
+                    foreach (string item in itemList)
+                    {
+                        Console.WriteLine($"- {item}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The list is empty.");
+                }
+
+                Console.WriteLine
+
+        //3
+        using System;
+        using System.Collections.Generic;
+
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Console.Write("Enter the start number: ");
+                int startNum = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter the end number: ");
+                int endNum = int.Parse(Console.ReadLine());
+
+                int[] primes = FindPrimesInRange(startNum, endNum);
+
+                Console.WriteLine($"Prime numbers between {startNum} and {endNum}: {string.Join(", ", primes)}");
+            }
+
+            static int[] FindPrimesInRange(int startNum, int endNum)
+            {
+                List<int> primes = new List<int>();
+
+                for (int i = Math.Max(2, startNum); i <= endNum; i++) // Ensure startNum is at least 2
+                {
+                    if (IsPrime(i))
+                    {
+                        primes.Add(i);
+                    }
+                }
+
+                return primes.ToArray();
+            }
+
+            static bool IsPrime(int number)
+            {
+                if (number <= 1) return false;
+
+                for (int i = 2; i <= Math.Sqrt(number); i++) // Check divisors up to the square root of the number
+                {
+                    if (number % i == 0)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+        
+        //4
+        using System;
+        using System.Collections.Generic;
+
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Console.Write("Enter the start number: ");
+                int startNum = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter the end number: ");
+                int endNum = int.Parse(Console.ReadLine());
+
+                int[] primes = FindPrimesInRange(startNum, endNum);
+
+                Console.WriteLine($"Prime numbers between {startNum} and {endNum}: {string.Join(", ", primes)}");
+            }
+
+            static int[] FindPrimesInRange(int startNum, int endNum)
+            {
+                List<int> primes = new List<int>();
+
+                for (int i = Math.Max(2, startNum); i <= endNum; i++) // Ensure startNum is at least 2
+                {
+                    if (IsPrime(i))
+                    {
+                        primes.Add(i);
+                    }
+                }
+
+                return primes.ToArray();
+            }
+
+            static bool IsPrime(int number)
+            {
+                if (number <= 1) return false;
+
+                for (int i = 2; i <= Math.Sqrt(number); i++) // Check divisors up to the square root of the number
+                {
+                    if (number % i == 0)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+//5
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Input: Array and number of rotations
+        Console.WriteLine("Enter the array (space-separated integers):");
+        int[] array = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+        Console.WriteLine("Enter the number of rotations:");
+        int k = int.Parse(Console.ReadLine());
+
+        int n = array.Length;
+        int[] sum = new int[n];
+
+        // Perform k rotations and calculate the sum
+        for (int r = 1; r <= k; r++)
+        {
+            int[] rotated = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                rotated[(i + r) % n] = array[i];
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                sum[i] += rotated[i];
+            }
+
+            // Output the current rotated array
+            Console.WriteLine($"Rotated {r}: {string.Join(" ", rotated)}");
+        }
+
+        // Output the sum array
+        Console.WriteLine($"Sum: {string.Join(" ", sum)}");
+    }
+}
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Input: Array and number of rotations
+        Console.WriteLine("Enter the array (space-separated integers):");
+        int[] array = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+        Console.WriteLine("Enter the number of rotations:");
+        int k = int.Parse(Console.ReadLine());
+
+        int n = array.Length;
+        int[] sum = new int[n];
+
+        // Perform k rotations and calculate the sum
+        for (int r = 1; r <= k; r++)
+        {
+            int[] rotated = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                rotated[(i + r) % n] = array[i];
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                sum[i] += rotated[i];
+            }
+
+            // Output the current rotated array
+            Console.WriteLine($"Rotated {r}: {string.Join(" ", rotated)}");
+        }
+
+        // Output the sum array
+        Console.WriteLine($"Sum: {string.Join(" ", sum)}");
+    }
+}
+//6
+                using System;
+                using System.Collections.Generic;
+
+                class MostFrequentNumber
+                {
+                    public static void Main(string[] args)
+                    {
+                        Console.WriteLine("Enter the array (space-separated integers):");
+                        int[] array = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+                        var frequency = new Dictionary<int, int>();
+                        int mostFrequentNumber = array[0];
+                        int maxFrequency = 0;
+
+                        // Count frequencies
+                        foreach (var number in array)
+                        {
+                            if (frequency.ContainsKey(number))
+                            {
+                                frequency[number]++;
+                            }
+                            else
+                            {
+                                frequency[number] = 1;
+                            }
+
+                            // Update most frequent number if necessary
+                            if (frequency[number] > maxFrequency || 
+                                (frequency[number] == maxFrequency && Array.IndexOf(array, number) < Array.IndexOf(array, mostFrequentNumber)))
+                            {
+                                mostFrequentNumber = number;
+                                maxFrequency = frequency[number];
+                            }
+                        }
+
+                        // Output the result
+                        Console.WriteLine($"Most frequent number: {mostFrequentNumber} (appears {maxFrequency} times)");
+                    }
+                }
+
+        //Practice String
+//1
+                using System;
+
+                class ReverseStringCharArray
+                {
+                    public static void Main(string[] args)
+                    {
+                        Console.WriteLine("Enter a string to reverse:");
+                        string input = Console.ReadLine();
+
+                        // Convert to char array, reverse it, and convert back to string
+                        char[] charArray = input.ToCharArray();
+                        Array.Reverse(charArray);
+                        string reversed = new string(charArray);
+
+                        Console.WriteLine($"Reversed string (Method 1): {reversed}");
+                    }
+                }
+//2
+                using System;
+                using System.Collections.Generic;
+                using System.Text.RegularExpressions;
+
+                class ReverseWordsInSentence
+                {
+                    public static void Main(string[] args)
+                    {
+                        Console.WriteLine("Enter a sentence:");
+                        string input = Console.ReadLine();
+
+                        string reversedSentence = ReverseWords(input);
+                        Console.WriteLine($"Reversed sentence:\n{reversedSentence}");
+                    }
+
+                    public static string ReverseWords(string sentence)
+                    {
+                        // Define the separators
+                        string separators = @"[.,:;=\(\)&\[\]\""'/!? ]";
+        
+                        // Split the sentence into words and separators
+                        string[] words = Regex.Split(sentence, separators);
+                        MatchCollection separatorsMatch = Regex.Matches(sentence, separators);
+
+                        // Extract words and reverse them
+                        List<string> wordList = new List<string>();
+                        foreach (var word in words)
+                        {
+                            if (!string.IsNullOrEmpty(word))
+                                wordList.Add(word);
+                        }
+                        wordList.Reverse();
+
+                        // Reconstruct the sentence
+                        int wordIndex = 0;
+                        string result = "";
+                        foreach (Match separator in separatorsMatch)
+                        {
+                            if (wordIndex < wordList.Count)
+                                result += wordList[wordIndex++];
+                            result += separator.Value;
+                        }
+
+                        return result;
+                    }
+                }
+//3
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text.RegularExpressions;
+
+                class ExtractPalindromes
+                {
+                    public static void Main(string[] args)
+                    {
+                        Console.WriteLine("Enter a text:");
+                        string input = Console.ReadLine();
+
+                        // Extract and process palindromes
+                        List<string> palindromes = FindUniquePalindromes(input);
+
+                        // Print the result
+                        Console.WriteLine(string.Join(", ", palindromes));
+                    }
+
+                    public static List<string> FindUniquePalindromes(string text)
+                    {
+                        // Define a regex to extract words
+                        string pattern = @"\b\w+\b";
+                        MatchCollection matches = Regex.Matches(text, pattern);
+
+                        HashSet<string> uniquePalindromes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                        foreach (Match match in matches)
+                        {
+                            string word = match.Value;
+
+                            // Check if the word is a palindrome
+                            if (IsPalindrome(word))
+                            {
+                                uniquePalindromes.Add(word);
+                            }
+                        }
+
+                        // Return sorted unique palindromes
+                        return uniquePalindromes.OrderBy(word => word, StringComparer.OrdinalIgnoreCase).ToList();
+                    }
+
+                    public static bool IsPalindrome(string word)
+                    {
+                        int left = 0;
+                        int right = word.Length - 1;
+
+                        while (left < right)
+                        {
+                            if (char.ToLower(word[left]) != char.ToLower(word[rig
+//4
+                            using System;
+
+                            class URLParser
+                            {
+                                public static void Main(string[] args)
+                                {
+                                    Console.WriteLine("Enter a URL:");
+                                    string input = Console.ReadLine();
+
+                                    ParseURL(input);
+                                }
+
+                                public static void ParseURL(string url)
+                                {
+                                    string protocol = "";
+                                    string server = "";
+                                    string resource = "";
+
+                                    // Check if there is a protocol
+                                    int protocolEndIndex = url.IndexOf("://");
+                                    if (protocolEndIndex != -1)
+                                    {
+                                        protocol = url.Substring(0, protocolEndIndex);
+                                        url = url.Substring(protocolEndIndex + 3); // Remove protocol and "://"
+                                    }
+
+                                    // Extract server and resource
+                                    int resourceStartIndex = url.IndexOf("/");
+                                    if (resourceStartIndex != -1)
+                                    {
+                                        server = url.Substring(0, resourceStartIndex);
+                                        resource = url.Substring(resourceStartIndex + 1); // Remove "/"
+                                    }
+                                    else
+                                    {
+                                        server = url; // No resource means the remaining part is the server
+                                    }
+
+                                    // Print the extracted components
+                                    Console.WriteLine($"[protocol] = \"{protocol}\"");
+                                    Console.WriteLine($"[server] = \"{server}\"");
+                                    Console.WriteLine($"[resource] = \"{resource}\"");
+                                }
+                            }
+
